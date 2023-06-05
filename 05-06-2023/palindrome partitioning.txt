@@ -1,0 +1,29 @@
+#include <bits/stdc++.h> 
+bool palindrome(string s,int i,int j){
+    int l=i,r=j;
+    while(l<r){
+        if(s[l]!=s[r]){
+        return false;
+        }
+        l++;
+        r--;
+    }
+    return true;
+}
+int fun(int i,string str,int n,vector<int>&dp){
+    if(i==n)return -1;
+    if(dp[i]!=-1)return dp[i];
+    int mincost=INT_MAX;
+    for(int j=i;j<n;j++){
+        if(palindrome(str,i,j)){
+        int cost=1+fun(j+1,str,n,dp);
+        mincost=min(mincost,cost);
+        }
+    }
+    return dp[i]=mincost;
+}
+int palindromePartitioning(string str) {
+    int n=str.size();
+    vector<int>dp(n,-1);
+     return fun(0,str,n,dp);
+}
