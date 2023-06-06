@@ -1,0 +1,28 @@
+Node *addTwoNumbers(Node *num1, Node *num2)
+{
+    Node * run= new Node();
+    Node *ans=run;
+    int bor=0;
+    while(num1!=NULL||num2!=NULL){
+        int temp=0;
+        if(num1){
+          temp+=num1->data;
+          num1=num1->next;
+        }
+        if(num2){
+            temp+=num2->data;
+            num2=num2->next;
+        }
+        temp+=bor;
+        Node * pres= new Node(temp%10);
+        run->next=pres;
+        bor=(temp/10);
+        run=run->next;
+    }
+    if(bor){
+         Node * pres= new Node(bor);
+         run->next=pres;
+    }
+
+    return ans->next;
+}
