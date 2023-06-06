@@ -1,0 +1,29 @@
+#include <bits/stdc++.h> 
+bool comparator(vector<int>v1,vector<int>v2){
+    return (v1[1]>v2[1]||(v2[1]==v1[1]&&v1[0]>=v2[0]));
+}
+int jobScheduling(vector<vector<int>> &jobs)
+{
+   sort(jobs.begin(),jobs.end(),comparator);
+   int maxdeadline=-1;
+   for(int i=0;i<jobs.size();i++){
+       maxdeadline=max(maxdeadline,jobs[i][0]);
+   }
+   vector<int>dp(maxdeadline+1,-1);
+   for(int i=0;i<jobs.size();i++){
+       int d=jobs[i][0];
+       for(int j=d;j>0;j--){
+           if(dp[j]==-1){
+               dp[j]=jobs[i][1];
+               break;
+           }
+       }
+   }
+   int ans=0;
+   for(int i=1;i<=maxdeadline;i++){
+       if(dp[i]!=-1){
+           ans=ans+dp[i];
+       }
+   }
+   return ans;
+}
