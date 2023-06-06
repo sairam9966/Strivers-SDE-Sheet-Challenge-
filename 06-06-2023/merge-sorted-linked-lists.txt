@@ -1,0 +1,37 @@
+Node<int>* sortTwoLists(Node<int>* first, Node<int>* second)
+{
+     Node<int>* createone=new Node<int>(-1);
+     Node<int>* ans=createone;
+
+     while(first!=NULL&&second!=NULL){
+        
+        if(first->data<second->data){
+        Node<int>* temp=new Node<int>(first->data);
+        createone->next=temp;
+        createone=createone->next;
+        first=first->next;
+        }
+        else{
+        Node<int>* temp=new Node<int>(second->data);
+        createone->next=temp;
+        createone=createone->next;
+        second=second->next;
+        }
+     }
+     while(first!=NULL){
+      Node<int>* temp=new Node<int>(first->data);
+        createone->next=temp;
+        createone=createone->next;
+        first=first->next;
+     }
+     while(second!=NULL){
+ Node<int>* temp=new Node<int>(second->data);
+        createone->next=temp;
+        createone=createone->next;
+        second=second->next;
+     }
+
+
+
+     return ans->next;
+}
