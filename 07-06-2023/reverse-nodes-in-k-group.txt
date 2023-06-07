@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+
+
+
+Node *getListAfterReverseOperation(Node *head, int n, int b[]){
+	Node * prevend=new Node(-1);
+	Node * presstart=head;
+	int flag=1;
+	Node *ans=NULL;
+	Node *prev=NULL;
+	Node * temp=head;
+	Node * next=NULL;
+	int i=0,j=0;
+	while(temp!=NULL&&(j<n)){
+     next=temp->next;
+     temp->next=prev;
+	 prev=temp;
+	 temp=next;
+     i++;
+	 if(i>=b[j]){
+		 i=0;
+		 j++;
+		while(j<n&&b[j]==0){
+			j++;
+		}
+		 if(flag){
+			 flag=0;
+			 ans=prev;
+		 }
+        prevend->next=prev;
+		presstart->next=temp;
+		prevend=presstart;
+		presstart=temp;
+		prev=NULL;
+	 }
+	}
+	
+	if(presstart==NULL){
+		return ans;
+	}
+	if(presstart!=NULL&&j>=n){
+		return ans;
+	}
+	if(i<b[j]){
+		prevend->next=prev;
+		presstart->next=temp;
+		if(flag)return prev;
+		return ans;
+	}
+   
+	
+	return ans;
+}
