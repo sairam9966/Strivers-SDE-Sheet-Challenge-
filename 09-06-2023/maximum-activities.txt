@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+int maximumActivities(vector<int> &start, vector<int> &end) {
+    // Write your code here.
+    int ans=0;
+     vector<pair<int,int>>vp;
+    int n=start.size();
+    for(int i=0;i<n;i++){
+      vp.push_back({end[i],start[i]});
+    }
+    sort(vp.begin(),vp.end());
+    
+    int t=-1;
+    for(int i=0;i<n;i++){
+        if(vp[i].second>=t){
+           ans++;
+            t=vp[i].first;
+        }
+        
+    }
+    return ans;
+}
