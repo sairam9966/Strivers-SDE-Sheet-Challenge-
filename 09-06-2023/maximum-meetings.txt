@@ -1,0 +1,27 @@
+#include <bits/stdc++.h> 
+bool cmp(const pair<int,pair<int,int>>&a,const pair<int,pair<int,int>>&b){
+    if(a.first<b.first)return true;
+    else if(a.first>b.first)return false;
+    else if(a.second.second<b.second.second)return true;
+    return false;
+    
+}
+vector<int> maximumMeetings(vector<int> &start, vector<int> &end) {
+    vector<pair<int,pair<int,int>>>vp;
+    int n=start.size();
+    for(int i=0;i<n;i++){
+      vp.push_back({end[i], {start[i],i+1}});
+    }
+    sort(vp.begin(),vp.end(),cmp);
+    vector<int>ans;
+    int t=-1;
+    for(int i=0;i<n;i++){
+        if(vp[i].second.first>t){
+            ans.push_back(vp[i].second.second);
+            t=vp[i].first;
+        }
+        
+    }
+    return ans;
+    
+}
