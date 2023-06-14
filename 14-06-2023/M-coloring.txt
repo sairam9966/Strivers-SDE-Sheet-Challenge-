@@ -1,0 +1,36 @@
+#include <bits/stdc++.h> 
+bool isvalid(int node,int col,vector<vector<int>>&mat,vector<int>&color,int total){
+   
+   for(int i=0;i<total;i++){
+       if(i!=node&&mat[node][i]==1&&color[i]==col){
+           return false;
+       }
+   }
+
+
+    return true;
+
+}
+bool solve(int node,int total,vector<vector<int>>&mat,int m,vector<int>&color){
+    if(node==total)return true;
+
+    for(int col=1;col<=m;col++){
+        if(isvalid(node,col,mat,color,total)){
+            color[node]=col;
+            if(solve(node+1,total,mat,m,color)==true){
+                return true;
+            }
+            color[node]=0;
+        }
+    }
+    return false;
+}
+string graphColoring(vector<vector<int>> &mat, int m) {
+    int n=mat.size();
+    vector<int>color(n);
+    if(solve(0,n,mat,m,color))
+    return "YES";
+    return "NO";
+
+
+}
