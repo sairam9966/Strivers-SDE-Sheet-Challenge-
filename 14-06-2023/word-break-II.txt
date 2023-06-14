@@ -1,0 +1,35 @@
+#include <bits/stdc++.h> 
+void func(int index , string &s,vector<string>&ans,string path,vector<string>&dic)
+{
+    if(index==s.size()){
+        ans.push_back(path);
+        return;
+    }
+    for(int i=index;i<s.size();i++){
+        string p=s.substr(index,i-index+1);
+        if(find(dic.begin(),dic.end(), p)!=dic.end()){
+            string temp=path;
+            path=path+(s.substr(index,i-index+1))+" ";
+            func(i+1,s,ans,path,dic);
+            path=temp;
+
+        }
+    }
+    
+}
+vector<string> wordBreak(string &s, vector<string> &dictionary)
+{
+    vector<string>ans;
+    string path;
+    func(0,s,ans,path,dictionary);
+    return ans;
+}
+
+
+
+
+
+
+
+
+
